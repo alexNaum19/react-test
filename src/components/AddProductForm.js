@@ -1,17 +1,37 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import {connect} from "react-redux";
 import CounterInput from './CounterInput';
 import ImageSelector from './ImageSelector';
 import styled from "styled-components";
-import PinapleImg from '../static/icons8-pineapple-40.png';
+import {setProducts} from '../store/products/actions';
+import {
+  getListProducts
+} from '../api/products';
 
-function AddProductForm({onAdd}) {
+function AddProductForm(props) {
+  const products = props.products;
   const initialState = {
     count: 1,
-    img: PinapleImg,
+    img: null,
+    imageId: 1,
     title: '',
     price: '',
     id: Math.floor(Math.random() * (10000 - 1) + 1),
   };
+
+  async function fetchProducts() {
+    try {
+      let res = await getListProducts();
+      props.setProducts(res.data)
+    } catch (err) {
+      console.log(err)
+
+    }
+  }
+
+  useEffect(() => {
+    fetchProducts()
+  }, [])
 
   const [product, setProduct] = React.useState(initialState)
 
@@ -21,8 +41,8 @@ function AddProductForm({onAdd}) {
 
   function addProduct(event) {
     event.preventDefault();
-    onAdd(product);
-    setProduct(initialState)
+    props.onAdd(product);
+    setProduct(initialState);
   }
 
   return (
@@ -50,7 +70,8 @@ function AddProductForm({onAdd}) {
       </CenterBox>
       <CenterBox>
         <ImageSelector
-          onChange={selected => changeProduct({img: selected.src})}/>
+          products={products}
+          onChange={selected => changeProduct({img: selected.src, imaeId: selected.imageId})}/>
       </CenterBox>
       <CenterBox>
         <button type="submit">Add to List</button>
@@ -80,5 +101,13 @@ const wrapperStyle = {
   margin: '0px 40px'
 
 };
+const putStateToProps = (state) => {
+  return {
+    products: state.products.productsList
+  }
+};
 
-export default AddProductForm;
+const putActionsToProps = {
+  setProducts
+}
+export default connect(putStateToProps, putActionsToProps)(AddProductForm);

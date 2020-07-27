@@ -1,10 +1,11 @@
 import React from "react";
+import ImagesArr from '../ImageSelector/imagesArray'
 
 export default function ProductProfile(props) {
   return (
     <div style={wrapperStyle}>
       <div> Buy {props.title}</div>
-      <div className="image-box"><img src={props.img}/> </div>
+      <div className="image-box"><img src={ImagesArr[props.imageId - 1]}/> </div>
       <div>Count: {props.count}</div>
       <div>Price: {props.price}</div>
       <div>Total:{(+props.price) * props.count } $</div>
