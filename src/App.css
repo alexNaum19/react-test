@@ -1,0 +1,61 @@
+body {
+  background-color: #181818;
+}
+
+#root {
+  text-align: center;
+  color: white;
+  height: 100vh;
+  width: 100vw;
+}
+
+button {
+  padding: 5px;
+  border: none;
+  background-color: #2b2c30;
+  color: inherit;
+  cursor: pointer;
+  margin: 0px auto;
+}
+button:hover {
+  background-color: #34495e
+}
+
+.active {
+  border: aliceblue;
+}
+
+.image-round-box{
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  background-color: #34495e;
+}
+
+.image-round-box img {
+  margin-top: 3px;
+}
+
+img .round-image {
+  margin-top: 3px;
+}
+div.list-box {
+  min-height: 232px;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+div.list-box-block {
+  width: 100%;
+}
+
+.margin-10 {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+div.image-round-box.selected {
+  background-color: #1a2435;
+}
+.react-select__menu-list {
+  margin: 20px;
+}
