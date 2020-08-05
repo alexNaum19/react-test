@@ -1,38 +1,26 @@
 import React from "react";
-import {connect} from "react-redux";
 import AddProductForm from "../components/AddProductForm";
 import {ProductList} from "../components/Product";
 import styled from "styled-components";
-import {changeProductCount, removeProductFromCart, addProductToCart} from '../store/cart/actions';
 
-const Home = (props) => {
-  /*const [cart, setCart] = React.useState([
-    {
-      id:1,
-      title: "apple",
-      price: '2',
-      count: 10,
-      img:PinapleImg
-    }
-  ]);*/
+const Home = () => {
+  const [cart, setCart] = React.useState([
+  ]);
 
   function removeFromCart(index) {
-    props.removeProductFromCart(index);
-    // setCart(cart.filter((item, i) => i !== index));
+    setCart(cart.filter((item, i) => i !== index));
   }
 
   function changeCartItemCount(index, count) {
-    props.changeProductCount({index, count});
-    // cart[index].count = count;
-    // setCart(cart.map((item, i) => {
-    //   if (index === i) item.count = count;
-    //   return item
-    // }))
+    cart[index].count = count;
+    setCart(cart.map((item, i) => {
+      if (index === i) item.count = count;
+      return item
+    }))
   }
 
   function addToCart(item) {
-    props.addProductToCart(item);
-    // setCart(cart.concat([item]))
+    setCart(cart.concat([item]))
   }
 
   return (
@@ -42,7 +30,7 @@ const Home = (props) => {
       </Box>
       <Box>
         <ProductList
-          cart={props.cartStorage.cart}
+          cart={cart}
           onRemove={removeFromCart}
           onCountChange={changeCartItemCount}
         />
@@ -52,20 +40,8 @@ const Home = (props) => {
   )
 };
 
-const putStateToProps = (state) => {
-  return {
-    cartStorage: state.cart,
-    products: state.products
-  }
-};
 
-const putActionsToProps = {
-  changeProductCount,
-  removeProductFromCart,
-  addProductToCart,
-};
-
-export default connect(putStateToProps, putActionsToProps)(Home);
+export default Home;
 
 const MainBox = styled.div`
   display: flex;

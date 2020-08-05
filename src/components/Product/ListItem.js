@@ -5,6 +5,7 @@ import {BsLink45Deg} from "react-icons/bs";
 import ImagesArr from '../ImageSelector/imagesArray'
 
 export default function ListItem({product, onCountChange, onRemove, onProfileShow, index}) {
+
   return (
     <div style={wrapperStyle}>
       <div style={imageBoxStyle} className="image-box">

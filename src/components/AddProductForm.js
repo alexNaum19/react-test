@@ -1,48 +1,28 @@
-import React, {useEffect} from 'react';
-import {connect} from "react-redux";
+import React from 'react';
 import CounterInput from './CounterInput';
 import ImageSelector from './ImageSelector';
 import styled from "styled-components";
-import {setProducts} from '../store/products/actions';
-import {
-  getListProducts
-} from '../api/products';
+import imagesArray from "./ImageSelector/imagesArray";
 
-function AddProductForm(props) {
-  const products = props.products;
+function AddProductForm({onAdd}) {
   const initialState = {
-    count: 1,
-    img: null,
+    count:1,
     imageId: 1,
     title: '',
     price: '',
     id: Math.floor(Math.random() * (10000 - 1) + 1),
-  };
-
-  async function fetchProducts() {
-    try {
-      let res = await getListProducts();
-      props.setProducts(res.data)
-    } catch (err) {
-      console.log(err)
-
-    }
   }
-
-  useEffect(() => {
-    fetchProducts()
-  }, [])
-
   const [product, setProduct] = React.useState(initialState)
 
   function changeProduct(obj) {
+
     setProduct({...product, ...obj})
   }
 
   function addProduct(event) {
     event.preventDefault();
-    props.onAdd(product);
-    setProduct(initialState);
+    onAdd(product);
+    setProduct(initialState)
   }
 
   return (
@@ -70,15 +50,14 @@ function AddProductForm(props) {
       </CenterBox>
       <CenterBox>
         <ImageSelector
-          products={products}
-          onChange={selected => changeProduct({img: selected.src, imaeId: selected.imageId})}/>
+          onChange={selected => changeProduct({ imageId: selected.imageId})}/>
       </CenterBox>
       <CenterBox>
         <button type="submit">Add to List</button>
       </CenterBox>
     </form>
-  )
-}
+  );
+};
 
 const TextInputStyle = {
   width: '100%',
@@ -94,20 +73,10 @@ const CenterBox = styled.div`
   margin: 5px;
   align-items: center;
   justify-content: space-between;
-`;
-
+`
 const wrapperStyle = {
   width: "100%",
   margin: '0px 40px'
 
 };
-const putStateToProps = (state) => {
-  return {
-    products: state.products.productsList
-  }
-};
-
-const putActionsToProps = {
-  setProducts
-}
-export default connect(putStateToProps, putActionsToProps)(AddProductForm);
+export default AddProductForm;

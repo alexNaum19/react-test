@@ -26,12 +26,12 @@ const CustomSelectValue = props => (
   </div>
 )
 
-// const imagesList = [
-//   {src: PinapleImg, id: 1, label: 'Pinaple', value: 'Pinaple'},
-//   {src: SpiceImg, id: 2, label: 'Spice', value: 'Spice'},
-//   {src: CheeseImg, id: 3, label: 'Cheese', value: 'Cheese'},
-//   {src: PizzaImg, id: 4, label: 'Pizza', value: 'Pizza'},
-// ];
+const imagesList = [
+  {src: ImagesArr[0], imageId: 1, label: 'Pinaple', value: 'Pinaple'},
+  {src: ImagesArr[1], imageId: 2, label: 'Spice', value: 'Spice'},
+  {src: ImagesArr[2], imageId: 3, label: 'Cheese', value: 'Cheese'},
+  {src: ImagesArr[3], imageId: 4, label: 'Pizza', value: 'Pizza'},
+];
 
 const customStyles = {
   option: (provided, state) => {
@@ -52,16 +52,12 @@ const customStyles = {
 };
 
 function ChooseImageSelect(props) {
-  const productsArr = props.products;
-  const productList = productsArr.map(p => {
-    p.src = ImagesArr[p.imageId -1]
-    return p
-  });
+  // const productsArr = imagesList;
 
   return (
     <Select
-      defaultValue={productList [0]}
-      options={productList}
+      defaultValue={imagesList [0]}
+      options={imagesList}
       onChange={props.onChange}
       styles={customStyles}
       isSearchable={false}
