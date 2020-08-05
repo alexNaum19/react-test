@@ -1,12 +1,9 @@
 import React from 'react';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import {createStore} from 'redux';
-import {connect, Provider} from 'react-redux';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Provider } from 'react-redux';
 import Home from './pages/Home';
-import rootReducer from './store/reducers'
 import './App.css';
-
-const store = createStore(rootReducer)
+import store from "./redux/store";
 
 function App() {
   return (

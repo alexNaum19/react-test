@@ -3,7 +3,6 @@ import {connect} from "react-redux";
 import AddProductForm from "../components/AddProductForm";
 import {ProductList} from "../components/Product";
 import styled from "styled-components";
-import {changeProductCount, removeProductFromCart, addProductToCart} from '../store/cart/actions';
 
 const Home = (props) => {
   /*const [cart, setCart] = React.useState([
@@ -16,7 +15,7 @@ const Home = (props) => {
     }
   ]);*/
 
-  function removeFromCart(index) {
+  /*function removeFromCart(index) {
     props.removeProductFromCart(index);
     // setCart(cart.filter((item, i) => i !== index));
   }
@@ -34,17 +33,17 @@ const Home = (props) => {
     props.addProductToCart(item);
     // setCart(cart.concat([item]))
   }
-
+*/
   return (
     <MainBox>
       <Box>
-        <AddProductForm onAdd={addToCart} />
+        <AddProductForm />
       </Box>
       <Box>
         <ProductList
-          cart={props.cartStorage.cart}
+          /*cart={props.cartStorage.cart}
           onRemove={removeFromCart}
-          onCountChange={changeCartItemCount}
+          onCountChange={changeCartItemCount}*/
         />
 
       </Box>
@@ -52,20 +51,8 @@ const Home = (props) => {
   )
 };
 
-const putStateToProps = (state) => {
-  return {
-    cartStorage: state.cart,
-    products: state.products
-  }
-};
 
-const putActionsToProps = {
-  changeProductCount,
-  removeProductFromCart,
-  addProductToCart,
-};
-
-export default connect(putStateToProps, putActionsToProps)(Home);
+export default Home;
 
 const MainBox = styled.div`
   display: flex;

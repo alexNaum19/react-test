@@ -1,6 +1,8 @@
-export const ADD_PRODUCT_TO_CART = 'ADD_PRODUCT_TO_CART';
-export const REMOVE_PRODUCT_FROM_CART = 'REMOVE_PRODUCT_FROM_CART';
-export const CHANGE_PRODUCT_COUNT = 'CHANGE_PRODUCT_COUNT';
+import {
+  ADD_PRODUCT_TO_CART,
+  CHANGE_PRODUCT_COUNT,
+  REMOVE_PRODUCT_FROM_CART
+} from "./cartTypes";
 
 export const addProductToCart = (product) => {
   return {

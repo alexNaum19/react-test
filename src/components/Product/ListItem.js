@@ -17,7 +17,7 @@ export default function ListItem({product, onCountChange, onRemove, onProfileSho
             min={1}
             max={99}
             count={product.count}
-            onCountChange={count => onCountChange(index, count)}
+            onCountChange={count => onCountChange({index, count})}
           />
         </div>
         <div className="margin-10">Total:{(+product.price) * product.count} $</div>

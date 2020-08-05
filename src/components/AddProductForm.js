@@ -1,33 +1,18 @@
-import React, {useEffect} from 'react';
-import {connect} from "react-redux";
+import React, { useEffect } from 'react';
+import { connect } from "react-redux";
 import CounterInput from './CounterInput';
 import ImageSelector from './ImageSelector';
 import styled from "styled-components";
-import {setProducts} from '../store/products/actions';
-import {
-  getListProducts
-} from '../api/products';
+import { addProductToCart, fetchProducts } from "../redux";
 
-function AddProductForm(props) {
-  const products = props.products;
+function AddProductForm({productsData, fetchProducts, addToCart}) {
   const initialState = {
     count: 1,
-    img: null,
     imageId: 1,
     title: '',
     price: '',
     id: Math.floor(Math.random() * (10000 - 1) + 1),
   };
-
-  async function fetchProducts() {
-    try {
-      let res = await getListProducts();
-      props.setProducts(res.data)
-    } catch (err) {
-      console.log(err)
-
-    }
-  }
 
   useEffect(() => {
     fetchProducts()
@@ -41,7 +26,7 @@ function AddProductForm(props) {
 
   function addProduct(event) {
     event.preventDefault();
-    props.onAdd(product);
+    addToCart(product);
     setProduct(initialState);
   }
 
@@ -70,8 +55,8 @@ function AddProductForm(props) {
       </CenterBox>
       <CenterBox>
         <ImageSelector
-          products={products}
-          onChange={selected => changeProduct({img: selected.src, imaeId: selected.imageId})}/>
+          products={productsData}
+          onChange={selected => changeProduct({img: selected.src, imageId: selected.imageId})}/>
       </CenterBox>
       <CenterBox>
         <button type="submit">Add to List</button>
@@ -101,13 +86,16 @@ const wrapperStyle = {
   margin: '0px 40px'
 
 };
-const putStateToProps = (state) => {
+const mapStateToProps = (state) => {
   return {
-    products: state.products.productsList
+    productsData: state.product.products
   }
 };
 
-const putActionsToProps = {
-  setProducts
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchProducts: () => dispatch(fetchProducts()),
+    addToCart: (product) => dispatch(addProductToCart(product))
+  }
 }
-export default connect(putStateToProps, putActionsToProps)(AddProductForm);
+export default connect(mapStateToProps, mapDispatchToProps)(AddProductForm);
