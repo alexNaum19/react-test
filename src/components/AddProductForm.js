@@ -2,20 +2,20 @@ import React from 'react';
 import CounterInput from './CounterInput';
 import ImageSelector from './ImageSelector';
 import styled from "styled-components";
-import PinapleImg from '../static/icons8-pineapple-40.png';
+import imagesArray from "./ImageSelector/imagesArray";
 
 function AddProductForm({onAdd}) {
   const initialState = {
-    count: 1,
-    img: PinapleImg,
+    count:1,
+    imageId: 1,
     title: '',
     price: '',
     id: Math.floor(Math.random() * (10000 - 1) + 1),
-  };
-
+  }
   const [product, setProduct] = React.useState(initialState)
 
   function changeProduct(obj) {
+
     setProduct({...product, ...obj})
   }
 
@@ -50,14 +50,14 @@ function AddProductForm({onAdd}) {
       </CenterBox>
       <CenterBox>
         <ImageSelector
-          onChange={selected => changeProduct({img: selected.src})}/>
+          onChange={selected => changeProduct({ imageId: selected.imageId})}/>
       </CenterBox>
       <CenterBox>
         <button type="submit">Add to List</button>
       </CenterBox>
     </form>
-  )
-}
+  );
+};
 
 const TextInputStyle = {
   width: '100%',
@@ -73,12 +73,10 @@ const CenterBox = styled.div`
   margin: 5px;
   align-items: center;
   justify-content: space-between;
-`;
-
+`
 const wrapperStyle = {
   width: "100%",
   margin: '0px 40px'
 
 };
-
 export default AddProductForm;

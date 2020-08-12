@@ -2,12 +2,14 @@ import React from "react";
 import CounterInput from "../CounterInput";
 import {BsFillTrashFill} from "react-icons/bs";
 import {BsLink45Deg} from "react-icons/bs";
+import ImagesArr from '../ImageSelector/imagesArray'
 
 export default function ListItem({product, onCountChange, onRemove, onProfileShow, index}) {
+
   return (
     <div style={wrapperStyle}>
       <div style={imageBoxStyle} className="image-box">
-        <div><img src={product.img}/></div>
+        <div><img src={ImagesArr[product.imageId - 1]}/></div>
       </div>
       <div style={columnBoxStyle}>
         <div className="margin-10"> Buy {product.title}</div>

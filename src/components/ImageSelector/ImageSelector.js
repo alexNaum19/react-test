@@ -1,9 +1,10 @@
 import React from "react";
 import Select, {components} from 'react-select';
-import PinapleImg from '../../static/icons8-pineapple-40.png';
-import SpiceImg from '../../static/icons8-spice-40.png';
-import CheeseImg from '../../static/icons8-cheese-40.png';
-import PizzaImg from '../../static/icons8-pizza-40.png';
+// import PinapleImg from '../../static/icons8-pineapple-40.png';
+// import SpiceImg from '../../static/icons8-spice-40.png';
+// import CheeseImg from '../../static/icons8-cheese-40.png';
+// import PizzaImg from '../../static/icons8-pizza-40.png';
+import ImagesArr from './imagesArray';
 
 const {Option} = components;
 
@@ -11,7 +12,7 @@ const CustomSelectOption = props => {
   const imageBoxClasses = ['image-round-box'];
   if (props.isSelected) imageBoxClasses.push('selected');
   return (
-    <Option {...props} value={props.data.id}>
+    <Option {...props} value={props.data.imageId}>
       <div className={imageBoxClasses.join(' ')} style={{marginLeft: 7}}>
         <img className='round-image' src={props.data.src} key={props.data.id} alt={props.data.label}/>
       </div>
@@ -26,10 +27,10 @@ const CustomSelectValue = props => (
 )
 
 const imagesList = [
-  {src: PinapleImg, id: 1, label: 'Pinaple', value: 'Pinaple'},
-  {src: SpiceImg, id: 2, label: 'Spice', value: 'Spice'},
-  {src: CheeseImg, id: 3, label: 'Cheese', value: 'Cheese'},
-  {src: PizzaImg, id: 4, label: 'Pizza', value: 'Pizza'},
+  {src: ImagesArr[0], imageId: 1, label: 'Pinaple', value: 'Pinaple'},
+  {src: ImagesArr[1], imageId: 2, label: 'Spice', value: 'Spice'},
+  {src: ImagesArr[2], imageId: 3, label: 'Cheese', value: 'Cheese'},
+  {src: ImagesArr[3], imageId: 4, label: 'Pizza', value: 'Pizza'},
 ];
 
 const customStyles = {
@@ -51,6 +52,8 @@ const customStyles = {
 };
 
 function ChooseImageSelect(props) {
+  // const productsArr = imagesList;
+
   return (
     <Select
       defaultValue={imagesList [0]}

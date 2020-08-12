@@ -3,16 +3,8 @@ import AddProductForm from "../components/AddProductForm";
 import {ProductList} from "../components/Product";
 import styled from "styled-components";
 
-import PinapleImg from "../static/icons8-pineapple-40.png";
-export const Home = () => {
+const Home = () => {
   const [cart, setCart] = React.useState([
-    {
-      id:1,
-      title: "apple",
-      price: '2',
-      count: 10,
-      img:PinapleImg
-    }
   ]);
 
   function removeFromCart(index) {
@@ -30,14 +22,13 @@ export const Home = () => {
   function addToCart(item) {
     setCart(cart.concat([item]))
   }
-  return (
 
+  return (
     <MainBox>
       <Box>
-        <AddProductForm onAdd={addToCart}/>
+        <AddProductForm onAdd={addToCart} />
       </Box>
       <Box>
-
         <ProductList
           cart={cart}
           onRemove={removeFromCart}
@@ -49,6 +40,8 @@ export const Home = () => {
   )
 };
 
+
+export default Home;
 
 const MainBox = styled.div`
   display: flex;
