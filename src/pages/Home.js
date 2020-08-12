@@ -1,11 +1,11 @@
 import React from "react";
+import {connect} from "react-redux";
 import AddProductForm from "../components/AddProductForm";
 import {ProductList} from "../components/Product";
 import styled from "styled-components";
 
-import PinapleImg from "../static/icons8-pineapple-40.png";
-export const Home = () => {
-  const [cart, setCart] = React.useState([
+const Home = (props) => {
+  /*const [cart, setCart] = React.useState([
     {
       id:1,
       title: "apple",
@@ -13,35 +13,37 @@ export const Home = () => {
       count: 10,
       img:PinapleImg
     }
-  ]);
+  ]);*/
 
-  function removeFromCart(index) {
-    setCart(cart.filter((item, i) => i !== index));
+  /*function removeFromCart(index) {
+    props.removeProductFromCart(index);
+    // setCart(cart.filter((item, i) => i !== index));
   }
 
   function changeCartItemCount(index, count) {
-    cart[index].count = count;
-    setCart(cart.map((item, i) => {
-      if (index === i) item.count = count;
-      return item
-    }))
+    props.changeProductCount({index, count});
+    // cart[index].count = count;
+    // setCart(cart.map((item, i) => {
+    //   if (index === i) item.count = count;
+    //   return item
+    // }))
   }
 
   function addToCart(item) {
-    setCart(cart.concat([item]))
+    props.addProductToCart(item);
+    // setCart(cart.concat([item]))
   }
+*/
   return (
-
     <MainBox>
       <Box>
-        <AddProductForm onAdd={addToCart}/>
+        <AddProductForm />
       </Box>
       <Box>
-
         <ProductList
-          cart={cart}
+          /*cart={props.cartStorage.cart}
           onRemove={removeFromCart}
-          onCountChange={changeCartItemCount}
+          onCountChange={changeCartItemCount}*/
         />
 
       </Box>
@@ -49,6 +51,8 @@ export const Home = () => {
   )
 };
 
+
+export default Home;
 
 const MainBox = styled.div`
   display: flex;
